@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-$t(wdjc^16q&v66qteg=ql6^sw+=t$mq45j1#zym!s$c455=35
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://health-prscription-api-ae69.onrender.com"]
+ALLOWED_HOSTS = ['.onrender.com']
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com"
+]
 
 
 # Application definition
