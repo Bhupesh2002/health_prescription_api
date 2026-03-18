@@ -10,10 +10,6 @@ from .views import (
     register_user
 )
 
-urlpatterns = [
-    path('register/', register_user),
-    path('mark_as_taken/',mark_as_taken),
-]
 
 router = DefaultRouter()
 router.register('family', FamilyMemberViewSet)
@@ -22,4 +18,9 @@ router.register('prescriptions', PrescriptionViewSet)
 router.register('logs', MedicationLogViewSet)
 router.register('today-medicines', TodayMedicineViewSet, basename='today-medicines')
 
-urlpatterns = router.urls   
+urlpatterns = [
+    path('register/', register_user),
+    path('mark_as_taken/',mark_as_taken),
+]
+
+urlpatterns += router.urls   
