@@ -6,10 +6,12 @@ from .views import (
     PrescriptionViewSet,
     MedicationLogViewSet,
     TodayMedicineViewSet,
-    mark_as_taken
+    mark_as_taken,
+    register_user
 )
 
 urlpatterns = [
+    path('register/', register_user),
     path('mark_as_taken/',mark_as_taken),
 ]
 

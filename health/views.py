@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from datetime import date
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -9,7 +10,8 @@ from .serializer import (
     MedicineSerializer,
     PrescriptionSerializer,
     MedicationLogSerializer,
-    TodayMedicineSerializer
+    TodayMedicineSerializer,
+    RegisterSerializer
 )
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
@@ -73,6 +75,16 @@ class TodayMedicineViewSet(viewsets.ReadOnlyModelViewSet):
             start_date__lte=today,
             end_date__gte=today
         )
+
+@api_view(['POST'])
+def register_user(request):
+    serializer = RegisterSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
